@@ -8,7 +8,7 @@ import random
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 
-from utils import getGraph, getHist, combineHist2D, getSFXY, deltaR
+from PhysicsTools.NanoAODTools.modules.utils import getGraph, getHist, combineHist2D, getSFXY, deltaR
 
 class MuonSelection(Module):
     VERYTIGHT = 1

@@ -4,7 +4,7 @@ import ROOT
 import math
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
-import gen_helper
+from PhysicsTools.NanoAODTools.modules.gen_helper import isLastCopy
 
 class TopPtWeightProducer(Module):
     DATA_NLO = 0 #data/NLO
@@ -39,14 +39,14 @@ class TopPtWeightProducer(Module):
         tt_cand = []
         genParts = Collection(event,'GenPart')
         for part in genParts:
-            if abs(part.pdgId) == 6 and gen_helper.isLastCopy(part):
+            if abs(part.pdgId) == 6 and isLastCopy(part):
                 tt_cand.append(part)
 
         weight = 1.
         if len(tt_cand) != 2:
-            print 'WARNING: {} top quarks found. No pt reweighting applied'.format(len(tt_cand))
+            print('WARNING: {} top quarks found. No pt reweighting applied'.format(len(tt_cand)))
         elif tt_cand[0].pdgId*tt_cand[1].pdgId > 0:
-            print 'WARNING: the two top quark candidated have the same charge. No pt reweighting applied'
+            print('WARNING: the two top quark candidated have the same charge. No pt reweighting applied')
         else:
             weight = self.getEventWeight(tt_cand)
 

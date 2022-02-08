@@ -8,7 +8,7 @@ import random
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 
-from utils import deltaR, deltaPhi
+from PhysicsTools.NanoAODTools.modules.utils import deltaR, deltaPhi
 
 
 class BTagSelection(Module):
@@ -106,11 +106,11 @@ class BTagSelection(Module):
         self.out.fillBranch("n"+self.outputName, len(bJets))
         for variable in self.storeKinematics:
             self.out.fillBranch(self.outputName+"_"+variable,
-                                map(lambda jet: getattr(jet, variable), bJets))
+                                list(map(lambda jet: getattr(jet, variable), bJets)))
 
         for variable in self.storeTruthKeys:
             self.out.fillBranch(self.outputName+"_"+variable,
-                                map(lambda jet: getattr(jet, variable), bJets))
+                                list(map(lambda jet: getattr(jet, variable), bJets)))
 
 
         setattr(event, self.outputName, bJets)

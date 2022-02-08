@@ -9,7 +9,7 @@ import numpy as np
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 
-from utils import getHist, getSFXY, deltaR
+from PhysicsTools.NanoAODTools.modules.utils import getHist, getSFXY, deltaR
 
 class ElectronSelection(Module):
     WP80 = 1

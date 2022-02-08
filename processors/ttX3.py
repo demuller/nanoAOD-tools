@@ -32,15 +32,15 @@ parser.add_argument('output', nargs=1)
 
 args = parser.parse_args()
 
-print "isData:",args.isData
-print "isSignal:",args.isSignal
-print "evaluate systematics:",not args.nosys
-print "invert lepton id/iso:",args.invid
-print "inputs:",len(args.inputFiles)
-print "year:", args.year
-print "output directory:", args.output[0]
+print("isData:",args.isData)
+print("isSignal:",args.isSignal)
+print("evaluate systematics:",not args.nosys)
+print("invert lepton id/iso:",args.invid)
+print("inputs:",len(args.inputFiles))
+print("year:", args.year)
+print("output directory:", args.output[0])
 if args.maxEvents:
-    print 'max number of events', args.maxEvents
+    print('max number of events', args.maxEvents)
 
 globalOptions = {
     "isData": args.isData,
@@ -175,7 +175,7 @@ def jetSelection(jetDict):
     #at least 2 b-tagged jets
     seq.append(
         EventSkim(selection=lambda event, systNames=systNames: 
-            any([len(filter(lambda jet: jet.isBTagged,getattr(event,"selectedJets_"+systName))) >= 2 for systName in systNames])
+            any([len(list(filter(lambda jet: jet.isBTagged,getattr(event,"selectedJets_"+systName)))) >= 2 for systName in systNames])
         )
     )
     
@@ -231,7 +231,7 @@ else:
         '''
         jesUncertaintyNames = ["Total"]
             
-        print "JECs: ",jesUncertaintyNames
+        print("JECs: ",jesUncertaintyNames)
         
     #TODO: apply type2 corrections? -> improves met modelling; in particular for 2018
     analyzerChain.append(

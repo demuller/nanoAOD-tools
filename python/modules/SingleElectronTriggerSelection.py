@@ -8,7 +8,7 @@ import random
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 
-from utils import getHist,combineHist2D,getSFXY
+from PhysicsTools.NanoAODTools.modules.utils import getHist,combineHist2D,getSFXY
 
 class SingleElectronTriggerSelection(Module):
     def __init__(

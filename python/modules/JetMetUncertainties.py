@@ -10,7 +10,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from PhysicsTools.NanoAODTools.postprocessing.tools import matchObjectCollection, matchObjectCollectionMultiple
 
-from utils import PhysicsObject, deltaR
+from PhysicsTools.NanoAODTools.modules.utils import PhysicsObject, deltaR
 
 class JERUncertaintyCalculator():
     def __init__(self,jerResolutionFileName,jerSFUncertaintyFileName):
@@ -35,12 +35,12 @@ class JERUncertaintyCalculator():
     def setSeed(self,event):
         """Set seed deterministically."""
         # (cf. https://github.com/cms-sw/cmssw/blob/master/PhysicsTools/PatUtils/interface/SmearedJetProducerT.h)
-        runnum  = long(event.run) << 20
-        luminum = long(event.luminosityBlock) << 10
+        runnum  = event.run << 20
+        luminum = event.luminosityBlock << 10
         evtnum  = event.event
-        jet0eta = long(event.Jet_eta[0]/0.01 if event.nJet>0 else 0)
-        seed    = 1L + runnum + evtnum + luminum + jet0eta
-        self.rnd.SetSeed(seed)
+        jet0eta = event.Jet_eta[0]/0.01 if event.nJet>0 else 0
+        seed    = 1 + runnum + evtnum + luminum + jet0eta
+        self.rnd.SetSeed(int(seed))
         
     def getResolution(self,jetIn,rho):
         if hasattr( jetIn, "p4"):

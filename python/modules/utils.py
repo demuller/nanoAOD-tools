@@ -27,13 +27,13 @@ class PhysicsObject(object):
 
     def originalP4(self):
         if self._obj==None:
-            print "ERROR - object does not dependent on nanoaod object"
+            print("ERROR - object does not dependent on nanoaod object")
             sys.exit(1)
         return self._obj.p4()
 
     def __str__(self):
         if self._obj==None:
-            print "ERROR - object does not dependent on nanoaod object"
+            print("ERROR - object does not dependent on nanoaod object")
             sys.exit(1)
         return self._obj.__str__()
 
